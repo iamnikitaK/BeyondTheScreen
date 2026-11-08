@@ -18,22 +18,18 @@ vectors = load_npz(
 )
 
 
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 98f45c1ccbe40dfb6bc7a159d7c67e37448d98a9
 try:
     TMDB_API_KEY = os.getenv("TMDB_API_KEY") or st.secrets["TMDB_API_KEY"]
 except Exception:
     TMDB_API_KEY = None
+
 
 if TMDB_API_KEY:
     print("TMDB API Key: FOUND")
     print("API Key length:", len(TMDB_API_KEY))
 else:
     print("TMDB API Key: NOT FOUND")
+
 
 def fetch_poster(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}"
