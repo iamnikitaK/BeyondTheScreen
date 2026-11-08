@@ -19,10 +19,7 @@ vectors = load_npz(
 
 
 
-# Load files
-# similarity = pickle.load(open('similarity.pkl', 'rb'))
-movies = pickle.load(open('movies.pkl', 'rb'))
-vectors = pickle.load(open('vectors.pkl', 'rb'))
+
 
 try:
     TMDB_API_KEY = os.getenv("TMDB_API_KEY") or st.secrets["TMDB_API_KEY"]
