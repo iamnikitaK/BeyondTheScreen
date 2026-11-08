@@ -1,0 +1,20 @@
+# Virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Large model file (stored separately)
+similarity.pkl
+
+# IDE files
+.idea/
+
+# Jupyter files
+.ipynb_checkpoints/
