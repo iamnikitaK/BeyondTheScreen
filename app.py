@@ -3,10 +3,26 @@ import pickle
 import pandas as pd
 import requests
 import os
+from sklearn.metrics.pairwise import cosine_similarity
+
+from scipy.sparse import load_npz
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+movies = pickle.load(
+    open(os.path.join(BASE_DIR, 'movies.pkl'), 'rb')
+)
+
+vectors = load_npz(
+    os.path.join(BASE_DIR, 'vectors.npz')
+)
+
+
 
 # Load files
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+# similarity = pickle.load(open('similarity.pkl', 'rb'))
 movies = pickle.load(open('movies.pkl', 'rb'))
+vectors = pickle.load(open('vectors.pkl', 'rb'))
 
 try:
     TMDB_API_KEY = os.getenv("TMDB_API_KEY") or st.secrets["TMDB_API_KEY"]
@@ -46,7 +62,10 @@ def fetch_poster(movie_id):
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
 
-    distances = similarity[movie_index]
+    distances = cosine_similarity(
+        vectors[movie_index],
+        vectors
+    ).flatten()
 
     recommendations = sorted(
         list(enumerate(distances)),
